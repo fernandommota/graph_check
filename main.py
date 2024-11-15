@@ -6,7 +6,7 @@ from pandas import DataFrame
 import os
 import multiprocessing
 
-user = whoami(token="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")
+user = whoami(token="")
 
 dataset = load_dataset("lytang/LLM-AggreFact")
 
