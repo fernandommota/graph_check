@@ -2,7 +2,7 @@
 
 ## Build image
 ```
-docker build --rm -t llm_aggre_fact .
+docker build --rm -t graph_check .
 ```
 
 ## Start Container

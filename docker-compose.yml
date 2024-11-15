@@ -1,7 +1,7 @@
 version: '3'
 services:
-  llm_aggre_fact_service:
-    image: llm_aggre_fact
+  graph_check_service:
+    image: graph_check
     volumes: 
       - /home/fernando/dev:/home/ubuntu/dev
     tty: true

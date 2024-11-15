@@ -6,9 +6,10 @@ from pandas import DataFrame
 import os
 import multiprocessing
 
-user = whoami(token="")
+from dotenv import dotenv_values
+config = dotenv_values(".env")
 
-dataset = load_dataset("lytang/LLM-AggreFact")
+dataset = load_dataset("lytang/LLM-AggreFact",token=config["HUGGINGFACE_ACCESS_TOKEN"])
 
 def query_llm(document, claim):
     #llama3.2, mixtral:8x7b
@@ -47,7 +48,7 @@ def rag_item(item):
 items = list(filter(lambda item: item["dataset"] == "ClaimVerify", dataset["test"]))
 pool_obj = multiprocessing.Pool(12)
 results = []
-results.append(pool_obj.map(rag_item,items))#items[0:3]
+results.append(pool_obj.map(rag_item,items[0:3]))#items[0:3]
 pool_obj.close()
 
 print(f'results len: {len(results[0])}')
@@ -56,5 +57,5 @@ df = DataFrame(data=np.array(results[0]),
                index=np.arange(len(results[0])), 
                columns=['dataset','id','label','predicted'])
 
-df.to_csv('output.csv', index=False)  
+df.to_csv('output/output.csv', index=False)  
 print(df)
